@@ -2,117 +2,118 @@ package com.cosmarket.memberInfo.model.service;
 
 import java.sql.Connection;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.cosmarket.memberInfo.model.dao.MemberDAO;
 import com.cosmarket.memberInfo.model.vo.MemberBuyer;
 import com.cosmarket.memberInfo.model.vo.MemberSeller;
 
-import commonSession.JDBCTemplate;
+import commonSession.SqlSessionTemplate;
+
 
 public class MemberService {
 	
-	JDBCTemplate jdbcTemplate;
 	MemberDAO mDao;
 	
 	public MemberService() {
-		jdbcTemplate = JDBCTemplate.getInstance();
 		mDao = new MemberDAO();
 	}
 
 	public int insertMemberBuyer(MemberBuyer memberBuyer) {
-		Connection conn = jdbcTemplate.createConnection();
-		int result = mDao.insertMemberBuyer(conn, memberBuyer);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		int result = mDao.insertMemberBuyer(session, memberBuyer);
 		if(result > 0) {
 			// 성공 - 커밋
-			jdbcTemplate.commit(conn);
+			session.commit();
 		} else {
 			// 실패 - 롤백
-			jdbcTemplate.rollback(conn);
+			session.rollback();
 		}
-		jdbcTemplate.close(conn);
+		session.close();
 		return result;
 	}
 
 	public int insertMemberSeller(MemberSeller memberSeller) {
-		Connection conn = jdbcTemplate.createConnection();
-		int result = mDao.insertMemberSeller(conn, memberSeller);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		int result = mDao.insertMemberSeller(session, memberSeller);
 		if(result > 0) {
 			// 성공 - 커밋
-			jdbcTemplate.commit(conn);
+			session.commit();
 		} else {
 			// 실패 - 롤백
-			jdbcTemplate.rollback(conn);
+			session.rollback();
 		}
-		jdbcTemplate.close(conn);
+		session.close();
 		return result;
 	}
 
 	public MemberBuyer selectCheckLoginBuyer(MemberBuyer memberBuyer) {
-		Connection conn = jdbcTemplate.createConnection();
-		MemberBuyer mOne = mDao.selectCheckLogin(conn, memberBuyer);
-		jdbcTemplate.close(conn);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		MemberBuyer mOne = mDao.selectCheckLogin(session, memberBuyer);
+		session.close();
 		return mOne;
 	}
 
 	public MemberSeller selectCheckLoginSeller(MemberSeller memberSeller) {
-		Connection conn = jdbcTemplate.createConnection();
-		MemberSeller mOne = mDao.selectCheckLogin(conn, memberSeller);
-		jdbcTemplate.close(conn);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		MemberSeller mOne = mDao.selectCheckLogin(session, memberSeller);
+		session.close();
 		return mOne;
 	}
 
 	public int deleteMember(String memberId, String memberType) {
-		Connection conn = jdbcTemplate.createConnection();
-		int result = mDao.deleteMember(conn, memberId, memberType);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		int result = mDao.deleteMember(session, memberId, memberType);
 		if(result > 0) {
 			// 성공 - 커밋
-			jdbcTemplate.commit(conn);
+			session.commit();
 		} else {
 			// 실패 - 롤백
-			jdbcTemplate.rollback(conn);
+			session.rollback();
 		}
-		jdbcTemplate.close(conn);
+		session.close();
 		return result;
 	}
 	
 	public int updateBuyerMember(MemberBuyer memberBuyer) {
-		Connection conn = jdbcTemplate.createConnection();
-		int result = mDao.updateBuyerMember(conn, memberBuyer);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		int result = mDao.updateBuyerMember(session, memberBuyer);
 		if(result > 0) {
 			// 성공 - 커밋
-			jdbcTemplate.commit(conn);
+			session.commit();
 		} else {
 			// 실패 - 롤백
-			jdbcTemplate.rollback(conn);
+			session.rollback();
 		}
-		jdbcTemplate.close(conn);
+		session.close();
 		return result;
 	}
 
 	public int updateSellerMember(MemberSeller memberSeller) {
-		Connection conn = jdbcTemplate.createConnection();
-		int result = mDao.updateSellerMember(conn, memberSeller);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		int result = mDao.updateSellerMember(session, memberSeller);
 		if(result > 0) {
 			// 성공 - 커밋
-			jdbcTemplate.commit(conn);
+			session.commit();
 		} else {
 			// 실패 - 롤백
-			jdbcTemplate.rollback(conn);
+			session.rollback();
 		}
-		jdbcTemplate.close(conn);
+		session.close();
 		return result;
 	}
 
 	public MemberBuyer selectOneBuyerById(String memberId) {
-		Connection conn = jdbcTemplate.createConnection();
-		MemberBuyer memberBuyer = mDao.selectOneBuyerById(conn, memberId);
-		jdbcTemplate.close(conn);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		MemberBuyer memberBuyer = mDao.selectOneBuyerById(session, memberId);
+		session.close();
 		return memberBuyer;
 	}
 
 	public MemberSeller selectOneSellerById(String memberId) {
-		Connection conn = jdbcTemplate.createConnection();
-		MemberSeller memberSeller = mDao.selectOneSellerById(conn, memberId);
-		jdbcTemplate.close(conn);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		MemberSeller memberSeller = mDao.selectOneSellerById(session, memberId);
+		session.close();
 		return memberSeller;
 	}
 

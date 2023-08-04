@@ -7,38 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.cosmarket.member.common.notice.model.vo.Notice;
 
 public class NoticeDAO {
 
-	public List<Notice> selectNoticeList(Connection conn, int currentPage) {
-		PreparedStatement pstmt = null;
+	public List<Notice> selectNoticeList(SqlSession session, int currentPage) {
 		List<Notice> nList = new ArrayList<Notice>();
-		Notice notice = null;
-		ResultSet rset = null;
 		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_NO DESC) ROW_NUM, NOTICE_TBL.* FROM NOTICE_TBL) WHERE ROW_NUM BETWEEN ? AND ?";
-		int recordCountPerPage = 10;
-		int start = 1 + ((currentPage-1) * recordCountPerPage);
-		int end = currentPage * recordCountPerPage;
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				notice = rsetToNotice(rset);
-				nList.add(notice);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rset.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+
 		return nList;
 	}
 
@@ -78,94 +56,30 @@ public class NoticeDAO {
 		return result.toString();
 	}
 
-	public int insertNotice(Connection conn, Notice notice) {
-		PreparedStatement pstmt = null;
+	public int insertNotice(SqlSession session, Notice notice) {
 		int result = 0;
 		String query = "INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICENO.NEXTVAL,?,?,'관리자',DEFAULT)";
 		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, notice.getNoticeSubject());
-			pstmt.setString(2, notice.getNoticeContent());
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		return result;
 	}
 
-	public int updateNotice(Connection conn, Notice notice) {
-		PreparedStatement pstmt = null;
+	public int updateNotice(SqlSession session, Notice notice) {
 		int result = 0;
 		String query = "UPDATE NOTICE_TBL SET NOTICE_SUBJECT = ?, NOTICE_CONTENT = ? WHERE NOTICE_NO = ?";
 		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, notice.getNoticeSubject());
-			pstmt.setString(2, notice.getNoticeContent());
-			pstmt.setInt(3, notice.getNoticeNo());
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		return result;
 	}
 
-	public int deleteNoticeByNo(Connection conn, int noticeNo) {
-		PreparedStatement pstmt = null;
+	public int deleteNoticeByNo(SqlSession session, int noticeNo) {
 		int result = 0;
 		String query = "DELETE FROM NOTICE_TBL WHERE NOTICE_NO = ?";
 		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, noticeNo);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		return result;
 	}
 
-	public Notice selectOneByNo(Connection conn, int noticeNo) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+	public Notice selectOneByNo(SqlSession session, int noticeNo) {
 		String query = "SELECT * FROM NOTICE_TBL WHERE NOTICE_NO = ?";
 		Notice notice = null;
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, noticeNo);
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				notice = rsetToNotice(rset);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rset.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		return notice;
 	}

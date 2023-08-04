@@ -3,70 +3,71 @@ package com.cosmarket.member.common.notice.model.service;
 import java.sql.Connection;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.cosmarket.member.common.notice.model.dao.NoticeDAO;
 import com.cosmarket.member.common.notice.model.vo.Notice;
 import com.cosmarket.member.common.notice.model.vo.PageData;
 
 import commonSession.JDBCTemplate;
+import commonSession.SqlSessionTemplate;
 
 public class NoticeService {
 	private NoticeDAO nDao;
-	private JDBCTemplate jdbcTemplate;
 	
 	public NoticeService() {
 		nDao = new NoticeDAO();
-		jdbcTemplate = JDBCTemplate.getInstance();
 	}
 
 	public PageData selectNoticeList(int currentPage) {
-		Connection conn = jdbcTemplate.createConnection();
-		List<Notice> nList = nDao.selectNoticeList(conn, currentPage);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		List<Notice> nList = nDao.selectNoticeList(session, currentPage);
 		String pageNavi = nDao.generatePageNavi(currentPage);
 		PageData pd = new PageData(nList, pageNavi);
-		jdbcTemplate.close(conn);
+		session.close();
 		return pd;
 	}
 
 	public Notice selectOneByNo(int noticeNo) {
-		Connection conn = jdbcTemplate.createConnection();
-		Notice notice = nDao.selectOneByNo(conn, noticeNo);
-		jdbcTemplate.close(conn);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		Notice notice = nDao.selectOneByNo(session, noticeNo);
+		session.close();
 		return notice;
 	}
 
 	public int insertNotice(Notice notice) {
-		Connection conn = jdbcTemplate.createConnection();
-		int result = nDao.insertNotice(conn, notice);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		int result = nDao.insertNotice(session, notice);
 		if(result > 0) {
-			jdbcTemplate.commit(conn);
+			session.commit();
 		} else {
-			jdbcTemplate.rollback(conn);
+			session.rollback();
 		}
-		jdbcTemplate.close(conn);
+		session.close();
 		return result;
 	}
 
 	public int updateNotice(Notice notice) {
-		Connection conn = jdbcTemplate.createConnection();
-		int result = nDao.updateNotice(conn, notice);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		int result = nDao.updateNotice(session, notice);
 		if(result > 0) {
-			jdbcTemplate.commit(conn);
+			session.commit();
 		} else {
-			jdbcTemplate.rollback(conn);
+			session.rollback();
 		}
-		jdbcTemplate.close(conn);
+		session.close();
 		return result;
 	}
 
 	public int deleteNoticeByNo(int noticeNo) {
-		Connection conn = jdbcTemplate.createConnection();
-		int result = nDao.deleteNoticeByNo(conn, noticeNo);
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		int result = nDao.deleteNoticeByNo(session, noticeNo);
 		if(result > 0) {
-			jdbcTemplate.commit(conn);
+			session.commit();
 		} else {
-			jdbcTemplate.rollback(conn);
+			session.rollback();
 		}
-		jdbcTemplate.close(conn);
+		session.close();
 		return result;
 	}
 }
