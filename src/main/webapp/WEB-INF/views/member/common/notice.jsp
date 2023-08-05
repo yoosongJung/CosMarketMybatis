@@ -8,7 +8,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../resources/css/1.main.css">
-        <link rel="stylesheet" href="../../resources/css/6.notice.css">
+        <!-- <link rel="stylesheet" href="../../resources/css/6.notice.css"> -->
+        <link href="${pageContext.request.contextPath}/resources/css/6.notice.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="../../resources/css/reset.css">
         <script src="https://kit.fontawesome.com/dbb376a4c5.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,6 +32,7 @@
                 <div class="search">
                     <input type="text" placeholder="제목을 입력해주세요" style="width: 250px">
                     <button id="findProduct" onclick="findWrite();"><i class="fa-solid fa-magnifying-glass" style="color: blue;"></i></button>
+	                <button class="insertNotice" onclick="javascript: location.href='/notice/insert.do'">공지사항 등록</button>
                 </div>
                 <table>
                     <thead>
@@ -46,7 +48,7 @@
 							<tr>
 								<td>${notice.noticeNo }</td>
 								<td><a href="/notice/detail.do?noticeNo=${notice.noticeNo }">${notice.noticeSubject }</a></td>
-								<td>${notice.noticeWriter }</td>
+								<td style="color:green; font-weight:900">${notice.noticeWriter }</td>
 								<td>${notice.noticeDate }</td>
 							</tr>
 						</c:forEach>

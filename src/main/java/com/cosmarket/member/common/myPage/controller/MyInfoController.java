@@ -36,7 +36,7 @@ public class MyInfoController extends HttpServlet {
 		if(memberType.equals("buyer")) {
 			MemberBuyer memberBuyer = service.selectOneBuyerById(memberId);
 			request.setAttribute("member", memberBuyer);
-		} else {
+		} else if(memberType.equals("seller")) {
 			MemberSeller memberSeller = service.selectOneSellerById(memberId);
 			request.setAttribute("member", memberSeller);
 		}

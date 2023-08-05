@@ -34,7 +34,8 @@ public class ListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NoticeService service = new NoticeService();
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		String page = request.getParameter("currentPage") != null ? request.getParameter("currentPage") : "1";
+		int currentPage = Integer.parseInt(page);
 		PageData pd = service.selectNoticeList(currentPage);
 		List<Notice> nList = pd.getnList();
 		request.setAttribute("nList", nList);

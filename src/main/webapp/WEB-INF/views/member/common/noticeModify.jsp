@@ -14,7 +14,28 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="${pageContext.request.contextPath}/resources/js/summernote/summernote-lite.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/summernote/summernote-lite.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
         <title>NoticeModify</title>
+        <style>
+        	input[type="submit"]{
+        		background-color: skyblue;
+        		color : black;
+        		font-weight : 900;
+        		border-radius : 5px;
+        		margin-right : 30px;
+        		padding : 0px 40px;
+        	}
+        	input[type="reset"]{
+        		font-weight : 900;
+        		border-radius : 5px;
+        		padding : 0px 20px;
+        	}
+        </style>
 	</head>
 	<body>
 		<header class="sticky-top navbar navbar-expand-lg" style="padding-top: 0px;">
@@ -24,22 +45,19 @@
         	<div id="main_left"></div>
         	<div id="main_middle">
 				<h2><b>공지사항 수정</b></h2>
+				<hr>
 				<form action="/notice/modify.do" method="post">
 				<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
 					<fieldset>
 						<!-- <legend>공지사항 수정</legend> -->
-						<ul>
-							<li>
-								<label>제목</label>
-								<input type="text" style="width:500px" id="" name="noticeSubject" value="${notice.noticeSubject }">
-							</li>
-							<li>
-								<label>내용</label>
-								<textarea rows="20" cols="70" id="" name="noticeContent">${notice.noticeContent }</textarea>
-							</li>
-						</ul>
+						
+						<label>제목</label>
+						<input type="text" style="width:500px" id="" name="noticeSubject" value="${notice.noticeSubject }">
+						
+						<textarea rows="20" cols="70" id="summernote" name="noticeContent">${notice.noticeContent }</textarea>
+						
 					</fieldset>
-					<div>
+					<div style="margin: 30px 10px">
 						<input type="submit" value="수정">
 						<input type="reset" value="초기화">
 					</div>
@@ -70,5 +88,16 @@
                 </div>
             </div>
         </footer>
+        <script>
+	        $(document).ready(function() {
+	            $('#summernote').summernote({
+	                    height: 300,                 // set editor height
+	                    minHeight: null,             // set minimum height of editor
+	                    maxHeight: null,             // set maximum height of editor
+	                    focus: false                  // set focus to editable area after initializing summernote
+	            });
+	        });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	</body>
 </html>

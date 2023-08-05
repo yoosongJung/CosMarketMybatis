@@ -7,17 +7,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.cosmarket.member.common.notice.model.vo.Notice;
 
 public class NoticeDAO {
 
-	public List<Notice> selectNoticeList(SqlSession session, int currentPage) {
-		List<Notice> nList = new ArrayList<Notice>();
-		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_NO DESC) ROW_NUM, NOTICE_TBL.* FROM NOTICE_TBL) WHERE ROW_NUM BETWEEN ? AND ?";
+	public int insertNotice(SqlSession session, Notice notice) {
+		int result = session.insert("NoticeMapper.insertNotice", notice);
+		return result;
+	}
 
+	public int updateNotice(SqlSession session, Notice notice) {
+		int result = session.update("NoticeMapper.updateNotice", notice);
+		return result;
+	}
+
+	public int deleteNoticeByNo(SqlSession session, int noticeNo) {
+		int result = session.delete("NoticeMapper.deleteNoticeByNo", noticeNo);
+		return result;
+	}
+
+	public List<Notice> selectNoticeList(SqlSession session, int currentPage) {
+		int limit = 10;
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Notice> nList = session.selectList("NoticeMapper.selectNoticeList", null, rowBounds);
 		return nList;
+	}
+
+	public Notice selectOneByNo(SqlSession session, int noticeNo) {
+		Notice notice = session.selectOne("NoticeMapper.selectOneByNo", noticeNo);
+		return notice;
 	}
 
 	public String generatePageNavi(int currentPage) {
@@ -56,42 +78,4 @@ public class NoticeDAO {
 		return result.toString();
 	}
 
-	public int insertNotice(SqlSession session, Notice notice) {
-		int result = 0;
-		String query = "INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICENO.NEXTVAL,?,?,'관리자',DEFAULT)";
-		
-		return result;
-	}
-
-	public int updateNotice(SqlSession session, Notice notice) {
-		int result = 0;
-		String query = "UPDATE NOTICE_TBL SET NOTICE_SUBJECT = ?, NOTICE_CONTENT = ? WHERE NOTICE_NO = ?";
-		
-		return result;
-	}
-
-	public int deleteNoticeByNo(SqlSession session, int noticeNo) {
-		int result = 0;
-		String query = "DELETE FROM NOTICE_TBL WHERE NOTICE_NO = ?";
-		
-		return result;
-	}
-
-	public Notice selectOneByNo(SqlSession session, int noticeNo) {
-		String query = "SELECT * FROM NOTICE_TBL WHERE NOTICE_NO = ?";
-		Notice notice = null;
-		
-		return notice;
-	}
-
-	private Notice rsetToNotice(ResultSet rset) throws SQLException {
-		Notice notice = new Notice();
-		notice.setNoticeNo(rset.getInt("NOTICE_NO"));
-		notice.setNoticeSubject(rset.getString("NOTICE_SUBJECT"));
-		notice.setNoticeContent(rset.getString("NOTICE_CONTENT"));
-		notice.setNoticeWriter(rset.getString("NOTICE_WRITER"));
-		notice.setNoticeDate(rset.getTimestamp("NOTICE_DATE"));
-		
-		return notice;
-	}
 }

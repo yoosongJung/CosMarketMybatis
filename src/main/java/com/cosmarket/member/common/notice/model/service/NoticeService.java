@@ -1,16 +1,14 @@
 package com.cosmarket.member.common.notice.model.service;
 
-import java.sql.Connection;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.cosmarket.commonSession.SqlSessionTemplate;
 import com.cosmarket.member.common.notice.model.dao.NoticeDAO;
 import com.cosmarket.member.common.notice.model.vo.Notice;
 import com.cosmarket.member.common.notice.model.vo.PageData;
 
-import commonSession.JDBCTemplate;
-import commonSession.SqlSessionTemplate;
 
 public class NoticeService {
 	private NoticeDAO nDao;

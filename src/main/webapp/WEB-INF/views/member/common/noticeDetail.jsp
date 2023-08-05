@@ -8,6 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../resources/css/1.main.css">
         <link rel="stylesheet" href="../../resources/css/6.notice.css">
+         <link href="${pageContext.request.contextPath}/resources/css/14.QandADetail.css" rel="stylesheet" type="text/css">
+         <link href="${pageContext.request.contextPath}/resources/css/6.notice.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="../../resources/css/reset.css">
         <script src="https://kit.fontawesome.com/dbb376a4c5.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +17,16 @@
         <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <title>NoticeDetail</title>
+        <style>
+        	.titlePassword input {
+        		text-align : center;
+        		margin-right : 40px;
+        	}
+        	#noticeDetailBlock {
+        		width: 80%;
+        		margin : 0 auto;
+        	}
+        </style>
 	</head>
 	<body>
 		<header class="sticky-top navbar navbar-expand-lg" style="padding-top: 0px;">
@@ -23,32 +35,29 @@
         <main>
         	<div id="main_left"></div>
 	        <div id="main_middle">
-				<h2><b>공지사항 상세</b></h2>
-				<ul>
-					<li>
-						<label>글번호</label>
-						<span>${requestScope.notice.noticeNo }</span>
-					</li>
-					<li>
-						<label>작성일</label>
-						<span>${requestScope.notice.noticeDate }</span>
-					</li>
-					<li>
-						<label>글쓴이</label>
-						<span>${requestScope.notice.noticeWriter }</span>
-					</li>
-					<li>
-						<label>제목</label>
-						<span>${notice.noticeSubject }</span>
-					</li>
-					<li>
-						<label>내용</label>
+					<label class="back"><a href="/notice/list.do?currentPage=1"><i class="fa-solid fa-arrow-rotate-left"></i>목록으로</a></label>
+					<h2><b>공지사항 상세</b></h2>
+					<hr>
+	        	<div id="noticeDetailBlock">
+					<div class="titlePassword">
+	                    <label>&nbsp;글번호 &nbsp;</label>
+	                    <input type="text" style="width: 5%;" value=${requestScope.notice.noticeNo } readonly>
+	                    <label>제목</label>
+	                    <input type="text" style="width: 25%;" value=${notice.noticeSubject } readonly>
+	                    <label>글쓴이</label>
+	                    <input type="text" style="width: 10%;" value=${notice.noticeWriter } readonly>
+	                    <label>작성일</label>
+	                    <input type="text" style="width: 100px;" value=${notice.noticeDate } readonly>
+	                </div>
+	                    <br>
 						<p>${notice.noticeContent }</p>
-					</li>
-				</ul>
-				<a href="/notice/list.do?currentPage=1">목록으로 이동</a><br>
-				<a href="/notice/modify.do?noticeNo=${notice.noticeNo }">수정하기</a><br>
-				<a href="javascript:void(0)" onclick="deleteCheck();">삭제하기</a><br>
+					<div class="modify">
+	                        <label>
+	                            <button onclick="javascript: location.href='/notice/modify.do?noticeNo=${notice.noticeNo }'"><i class="fa-solid fa-pen-to-square"></i>글 수정</button>
+	                            <button onclick="deleteCheck();"><i class="fa-solid fa-trash"></i>글 삭제</button>
+	                        </label>
+	               	</div>
+               	</div>
 			</div>
 			<div id="main_right"></div>
 		</main>
@@ -83,5 +92,6 @@
 			}
 		}
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 </html>

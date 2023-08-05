@@ -1,14 +1,12 @@
 package com.cosmarket.memberInfo.model.service;
 
-import java.sql.Connection;
-
 import org.apache.ibatis.session.SqlSession;
 
+import com.cosmarket.commonSession.SqlSessionTemplate;
 import com.cosmarket.memberInfo.model.dao.MemberDAO;
 import com.cosmarket.memberInfo.model.vo.MemberBuyer;
 import com.cosmarket.memberInfo.model.vo.MemberSeller;
 
-import commonSession.SqlSessionTemplate;
 
 
 public class MemberService {
