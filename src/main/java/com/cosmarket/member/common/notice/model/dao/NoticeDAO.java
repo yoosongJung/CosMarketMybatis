@@ -1,10 +1,5 @@
 package com.cosmarket.member.common.notice.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -42,8 +37,8 @@ public class NoticeDAO {
 		return notice;
 	}
 
-	public String generatePageNavi(int currentPage) {
-		int totalCount = 200;
+	public String generatePageNavi(SqlSession session, int currentPage) {
+		int totalCount = getTotalCount(session);
 		int recordCountPerPage = 10;
 		int naviTotalCount = 0;
 		if(totalCount % recordCountPerPage > 0) {
@@ -76,6 +71,11 @@ public class NoticeDAO {
 			result.append("<a href='/notice/list.do?currentPage="+(endNavi+1)+"'>[다음]</a>");
 		}
 		return result.toString();
+	}
+
+	private int getTotalCount(SqlSession session) {
+		int totalCount = session.selectOne("NoticeMapper.getTotalCount");
+		return totalCount;
 	}
 
 }

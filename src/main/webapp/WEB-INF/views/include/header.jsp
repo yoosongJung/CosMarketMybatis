@@ -7,7 +7,6 @@
             <div id="nav" class="container-fluid">
                 <div id="nav2">
                     로그인role에 따른 navbar구현시
-                    <button onclick="javascript:location.href='./member/seller/manageProduct.html'">판매자전용페이지</button>
                     <button onclick="javascript:location.href='./admin/sellerRecognize.html'">관리자전용페이지</button>
                     <input type="text" placeholder="Search">
                     <button id="navSearch" onclick="navSearch();"><i class="fa-solid fa-magnifying-glass" style="color: #f7f7f7;"></i></button>
@@ -32,7 +31,7 @@
                                 <li><a class="dropdown-item" href="./member/common/freeBoard.html">자유게시판</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item" style="margin-top: 13px;"><a href="./member/buyer/shoppingBasket.html">장바구니</a></li>
+                        <li class="nav-item" style="margin-top: 13px;"><a href="/buyer/shoppingBasket.do">장바구니</a></li>
                         </c:if>
                         <c:if test="${memberType eq 'buyer' }">
                         <li class="nav-item" style="margin-top: 13px;"><a href="#">${memberName }님</a></li>
@@ -49,7 +48,7 @@
                                 <li><a class="dropdown-item" href="./member/common/freeBoard.html">자유게시판</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item" style="margin-top: 13px;"><a href="./member/buyer/shoppingBasket.html">장바구니</a></li>
+                        <li class="nav-item" style="margin-top: 13px;"><a href="/buyer/shoppingBasket.do">장바구니</a></li>
                         </c:if>
                         <c:if test="${memberType eq 'seller' }">
                         <li class="nav-item" style="margin-top: 13px;"><a href="#">${memberName }님</a></li>

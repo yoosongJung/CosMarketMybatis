@@ -35,7 +35,7 @@
         <main>
         	<div id="main_left"></div>
 	        <div id="main_middle">
-					<label class="back"><a href="/notice/list.do?currentPage=1"><i class="fa-solid fa-arrow-rotate-left"></i>목록으로</a></label>
+					<label class="back"><a href="javascript:history.back();"><i class="fa-solid fa-arrow-rotate-left"></i>목록으로</a></label>
 					<h2><b>공지사항 상세</b></h2>
 					<hr>
 	        	<div id="noticeDetailBlock">
@@ -76,8 +76,8 @@
                 </div>
                 <div class="footer footer2">
                     <ul>
-                        <li><a href="../../admin/companyIntro.html">회사소개</a></li>
-                        <li><a href="../../admin/companyHistory.html">회사연혁</a></li>
+                        <li><a href="..//admin/companyIntro.do">회사소개</a></li>
+                        <li><a href="..//admin/companyHistory.do">회사연혁</a></li>
                         <li><a href="">이용약관</a></li>
                         <li><a href="">개인정보취급방침</a></li>
                     </ul>

@@ -32,21 +32,21 @@
                     </tr>
                     <c:if test="${memberType eq 'buyer' }">
 	                    <tr>
-	                        <td><a href="../buyer/orderHistory.html">주문내역</a></td>
+	                        <td><a href="/buyer/orderHistory.do">주문내역</a></td>
 	                    </tr>
 	                    <tr>
-	                        <td><a href="../buyer/actHistory.html">내 활동내역</a></td>
+	                        <td><a href="/buyer/actHistory.do">내 활동내역</a></td>
 	                    </tr>
                     </c:if>
                     <c:if test="${memberType eq 'seller' }">
 	                    <tr>
-	                        <td><a href="./manageProduct.html">상품관리</a></td>
+	                        <td><a href="/seller/manageProduct.do">상품관리</a></td>
 	                    </tr>
 	                    <tr>
-	                        <td><a href="./addProduct.html">상품등록</a></td>
+	                        <td><a href="/seller/addProduct.do">상품등록</a></td>
 	                    </tr>
 	                    <tr>
-	                        <td><a href="./manageOrderDelivery.html">주문/발송 관리</a></td>
+	                        <td><a href="/seller/manageOrderDelivery.do">주문/발송 관리</a></td>
 	                    </tr>
                     </c:if>
                     <tr>
@@ -105,8 +105,8 @@
                 </div>
                 <div class="footer footer2">
                     <ul>
-                        <li><a href="../../admin/companyIntro.html">회사소개</a></li>
-                        <li><a href="../../admin/companyHistory.html">회사연혁</a></li>
+                        <li><a href="..//admin/companyIntro.do">회사소개</a></li>
+                        <li><a href="..//admin/companyHistory.do">회사연혁</a></li>
                         <li><a href="">이용약관</a></li>
                         <li><a href="">개인정보취급방침</a></li>
                     </ul>

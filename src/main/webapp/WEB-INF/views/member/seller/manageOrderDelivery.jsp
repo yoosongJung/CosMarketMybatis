@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -16,38 +18,7 @@
     </head>
     <body>
         <header class="sticky-top navbar navbar-expand-lg" style="padding-top: 0px;">
-            
-            <div class="logo">
-                <a class="navbar-brand" href="../../index.jsp"><img src="../../resources/images/main/logo.PNG" alt=""></a>
-            </div>
-            <div id="nav" class="container-fluid">
-                <div id="nav2">
-                    <input type="text" placeholder="Search">
-                    <button id="navSearch"><i class="fa-solid fa-magnifying-glass" style="color: #f7f7f7;"></i></button>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item" style="margin-top: 13px;"><a href="/memberInfo/register.do">회원가입</a></li>
-                        <li class="nav-item" style="margin-top: 13px;"><a href="/memberInfo/login.do">로그인</a></li>
-                        <li class="nav-item" style="margin-top: 13px;"><a href="/member/myInfo.do?memberId=${memberId}&memberType=${memberType}">마이페이지</a></li>
-                        <li class="nav-item" style="margin-top: 13px;"><a href="../common/premium.html">프리미엄</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                게시판
-                            </a>
-                            <ul class="dropdown-menu" style="background-color: skyblue;">
-                                <li><a class="dropdown-item" href="/notice/list.do?currentPage=1">공지사항</a></li>
-                                <li><a class="dropdown-item" href="../common/QndA.html">Q&A</a></li>
-                                <li><a class="dropdown-item" href="../common/freeBoard.html">자유게시판</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        
+            <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
         </header>
         <main>
             <div id="main_left">
@@ -59,13 +30,13 @@
                         <td><a href="/member/myInfo.do?memberId=${memberId}&memberType=${memberType}">회원정보</a></td>
                     </tr>
                     <tr>
-                        <td><a href="./manageProduct.html">상품관리</a></td>
+                        <td><a href="/seller/manageProduct.do">상품관리</a></td>
                     </tr>
                     <tr>
-                        <td><a href="./addProduct.html">상품등록</a></td>
+                        <td><a href="/seller/addProduct.do">상품등록</a></td>
                     </tr>
                     <tr>
-                        <td style="background-color: white;"><a href=".//manageOrderDelivery.html">주문/발송 관리</a></td>
+                        <td style="background-color: white;"><a href="/seller/manageOrderDelivery.do">주문/발송 관리</a></td>
                     </tr>
                     <tr>
                         <td><a href="/member/delete.do">회원탈퇴</a></td>
@@ -155,8 +126,8 @@
                 </div>
                 <div class="footer footer2">
                     <ul>
-                        <li><a href="../../admin/companyIntro.html">회사소개</a></li>
-                        <li><a href="../../admin/companyHistory.html">회사연혁</a></li>
+                        <li><a href="..//admin/companyIntro.do">회사소개</a></li>
+                        <li><a href="..//admin/companyHistory.do">회사연혁</a></li>
                         <li><a href="">이용약관</a></li>
                         <li><a href="">개인정보취급방침</a></li>
                     </ul>

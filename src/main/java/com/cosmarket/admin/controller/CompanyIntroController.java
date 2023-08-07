@@ -1,4 +1,4 @@
-package com.cosmarket.member.buyer;
+package com.cosmarket.admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ShoppingBasketController
+ * Servlet implementation class CompanyIntroController
  */
-@WebServlet("/buyer/shoppingBasket.do")
-public class ShoppingBasketController extends HttpServlet {
+@WebServlet("/admin/companyIntro.do")
+public class CompanyIntroController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShoppingBasketController() {
+    public CompanyIntroController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class ShoppingBasketController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/buyer/shoppingBasket.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/companyIntro.jsp").forward(request, response);
 	}
 
 	/**
