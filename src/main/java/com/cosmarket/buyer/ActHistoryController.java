@@ -1,4 +1,4 @@
-package com.cosmarket.member.buyer;
+package com.cosmarket.buyer;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

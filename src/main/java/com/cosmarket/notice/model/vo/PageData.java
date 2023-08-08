@@ -1,4 +1,4 @@
-package com.cosmarket.member.common.notice.model.vo;
+package com.cosmarket.notice.model.vo;
 
 import java.util.List;
 

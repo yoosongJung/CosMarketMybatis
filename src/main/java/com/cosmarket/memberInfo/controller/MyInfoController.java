@@ -1,4 +1,4 @@
-package com.cosmarket.member.common.myPage.controller;
+package com.cosmarket.memberInfo.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

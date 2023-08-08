@@ -1,11 +1,11 @@
-package com.cosmarket.member.common.notice.model.dao;
+package com.cosmarket.notice.model.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
-import com.cosmarket.member.common.notice.model.vo.Notice;
+import com.cosmarket.notice.model.vo.Notice;
 
 public class NoticeDAO {
 

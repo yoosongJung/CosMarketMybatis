@@ -1,7 +1,6 @@
-package com.cosmarket.member.common.notice.controller;
+package com.cosmarket.notice.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cosmarket.member.common.notice.model.service.NoticeService;
-import com.cosmarket.member.common.notice.model.vo.Notice;
-import com.cosmarket.member.common.notice.model.vo.PageData;
+import com.cosmarket.notice.model.service.NoticeService;
+import com.cosmarket.notice.model.vo.Notice;
+
 
 /**
- * Servlet implementation class ListController
+ * Servlet implementation class DetailController
  */
-@WebServlet("/notice/list.do")
-public class ListController extends HttpServlet {
+@WebServlet("/notice/detail.do")
+public class DetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListController() {
+    public DetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,15 +32,19 @@ public class ListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		NoticeService service = new NoticeService();
-		String page = request.getParameter("currentPage") != null ? request.getParameter("currentPage") : "1";
-		int currentPage = Integer.parseInt(page);
-		PageData pd = service.selectNoticeList(currentPage);
-		List<Notice> nList = pd.getnList();
-		request.setAttribute("nList", nList);
-		request.setAttribute("pageNavi", pd.getPageNavi());
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/common/notice.jsp");
-		view.forward(request, response);
+		Notice notice = service.selectOneByNo(noticeNo);
+		if(notice != null) {
+			// 상세 페이지로 이동
+			request.setAttribute("notice", notice);
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/common/noticeDetail.jsp");
+			view.forward(request, response);
+		} else {
+			// 실패 페이지로 이동
+			request.setAttribute("msg", "데이터가 존재하지 않습니다.");
+			request.getRequestDispatcher("/WEB-INF/views/commonDisplay/serviceFailed.jsp").forward(request, response);
+		}
 	}
 
 	/**

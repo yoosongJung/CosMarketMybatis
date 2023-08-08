@@ -1,4 +1,4 @@
-package com.cosmarket.member.seller;
+package com.cosmarket.buyer;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class manageProductController
+ * Servlet implementation class OrderHistoryController
  */
-@WebServlet("/seller/manageProduct.do")
-public class manageProductController extends HttpServlet {
+@WebServlet("/buyer/orderHistory.do")
+public class OrderHistoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public manageProductController() {
+    public OrderHistoryController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class manageProductController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/seller/manageProduct.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/buyer/orderHistory.jsp").forward(request, response);
 	}
 
 	/**

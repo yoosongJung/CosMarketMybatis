@@ -1,4 +1,4 @@
-package com.cosmarket.member.common.myPage.controller;
+package com.cosmarket.memberInfo.controller;
 
 import java.io.IOException;
 
@@ -14,16 +14,16 @@ import com.cosmarket.memberInfo.model.vo.MemberBuyer;
 import com.cosmarket.memberInfo.model.vo.MemberSeller;
 
 /**
- * Servlet implementation class DeleteMemberController
+ * Servlet implementation class UpdateController
  */
-@WebServlet("/member/delete.do")
-public class DeleteMemberController extends HttpServlet {
+@WebServlet("/member/update.do")
+public class UpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteMemberController() {
+    public UpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +32,15 @@ public class DeleteMemberController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/common/secession.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		MemberService service = new MemberService();
 		MemberBuyer mOneBuyer = null;
 		MemberSeller mOneSeller = null;
@@ -53,24 +55,39 @@ public class DeleteMemberController extends HttpServlet {
 			mOneSeller = service.selectCheckLoginSeller(memberSeller);
 		}
 		if(mOneBuyer != null || mOneSeller != null) {
-			int result = service.deleteMember(memberId, memberType);
+			int result = 0;
+			String memberPwNew = request.getParameter("memberPwNew");
+			String memberPwNewCheck = request.getParameter("memberPwNewCheck");
+			String memberEmail = request.getParameter("memberEmail");
+			String memberPhone = request.getParameter("memberPhone");
+			String memberPostcode = request.getParameter("memberPostcode");
+			String memberAddress = request.getParameter("memberAddress");
+			String memberAddressDetail = request.getParameter("memberAddressDetail");
+			if(mOneBuyer != null) {
+				MemberBuyer memberBuyer = new MemberBuyer(memberId, memberPwNew, memberPwNewCheck, memberEmail, memberPhone, memberPostcode, memberAddress, memberAddressDetail);
+				result = service.updateBuyerMember(memberBuyer);
+			} else {
+				String memberBank = request.getParameter("memberBank");
+				String memberAccount = request.getParameter("memberAccount");
+				MemberSeller memberSeller = new MemberSeller(memberId, memberPwNew, memberPwNewCheck, memberEmail, memberPhone, memberPostcode, memberAddress, memberAddressDetail, memberBank, memberAccount);
+				result = service.updateSellerMember(memberSeller);
+			}
 			if(result > 0) {
 				// 성공
-				request.setAttribute("msg", "회원탈퇴 성공");
-				request.setAttribute("url", "/memberInfo/logout.do");
+				request.setAttribute("msg", "회원정보 수정 성공");
+				request.setAttribute("url", "/member/myInfo.do?memberId="+memberId+"&memberType="+ memberType);
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/commonDisplay/serviceSuccess.jsp");
 				view.forward(request, response);
 			} else {
 				// 실패
-				request.setAttribute("msg", "회원탈퇴 실패(비밀번호 불일치)");
-				request.setAttribute("url", "/member/delete.do");
+				request.setAttribute("msg", "회원정보 수정 실패");
+				request.setAttribute("url", "/member/myInfo.do?memberId="+memberId+"&memberType="+ memberType);
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/commonDisplay/serviceFailed.jsp");
 				view.forward(request, response);
 			}
 		} else {
-			// 실패
-			request.setAttribute("msg", "회원탈퇴 실패(비밀번호 불일치)");
-			request.setAttribute("url", "/member/delete.do");
+			request.setAttribute("msg", "현재 비밀번호 불일치");
+			request.setAttribute("url", "/member/myInfo.do?memberId="+memberId+"&memberType="+ memberType);
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/commonDisplay/serviceFailed.jsp");
 			view.forward(request, response);
 		}
