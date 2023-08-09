@@ -1,4 +1,4 @@
-package com.cosmarket.admin.controller;
+package com.cosmarket.admin;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

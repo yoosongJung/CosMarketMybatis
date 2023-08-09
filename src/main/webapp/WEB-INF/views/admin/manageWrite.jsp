@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -16,38 +18,7 @@
     </head>
     <body>
         <header class="sticky-top navbar navbar-expand-lg" style="padding-top: 0px;">
-            
-            <div class="logo">
-                <a class="navbar-brand" href="../index.jsp"><img src="../resources/images/main/logo.PNG" alt=""></a>
-            </div>
-            <div id="nav" class="container-fluid">
-                <div id="nav2">
-                    <input type="text" placeholder="Search">
-                    <button id="navSearch"><i class="fa-solid fa-magnifying-glass" style="color: #f7f7f7;"></i></button>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item" style="margin-top: 13px;"><a href="/memberInfo/register.do">회원가입</a></li>
-                        <li class="nav-item" style="margin-top: 13px;"><a href="/memberInfo/login.do">로그인</a></li>
-                        <li class="nav-item" style="margin-top: 13px;"><a href="/member/myInfo.do?memberId=${memberId}&memberType=${memberType}">마이페이지</a></li>
-                        <li class="nav-item" style="margin-top: 13px;"><a href="../member/common/premium.html">프리미엄</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                게시판
-                            </a>
-                            <ul class="dropdown-menu" style="background-color: skyblue;">
-                                <li><a class="dropdown-item" href="/notice/list.do?currentPage=1">공지사항</a></li>
-                                <li><a class="dropdown-item" href="../member/common/QndA.html">Q&A</a></li>
-                                <li><a class="dropdown-item" href="../member/common/freeBoard.html">자유게시판</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        
+            <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
         </header>
         <main>
             <div id="main_left">
@@ -56,16 +27,16 @@
                         <th>관리자 페이지</th>
                     </tr>
                     <tr>
-                        <td><a href="./sellerRecognize.html">사업자 가입승인</a></td>
+                        <td><a href="/admin/sellerRecognize.do">사업자 가입승인</a></td>
                     </tr>
                     <tr>
-                        <td><a href="./manageMember.html">회원관리</a></td>
+                        <td><a href="/admin/manageMember.do">회원관리</a></td>
                     </tr>
                     <tr>
-                        <td><a href="/seller/manageProduct.do">상품관리</a></td>
+                        <td><a href="/admin/manageProduct.do">상품관리</a></td>
                     </tr>
                     <tr>
-                        <td style="background-color: white;"><a href="./manageWrite.html">게시판관리</a></td>
+                        <td style="background-color: white;"><a href="/admin/manageWrite.do">게시판관리</a></td>
                     </tr>
                 </table>
             </div>

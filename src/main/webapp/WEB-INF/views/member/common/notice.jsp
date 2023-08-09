@@ -32,7 +32,9 @@
                 <div class="search">
                     <input type="text" placeholder="제목을 입력해주세요" style="width: 250px">
                     <button id="findProduct" onclick="findWrite();"><i class="fa-solid fa-magnifying-glass" style="color: blue;"></i></button>
+	                <c:if test="${memberId eq 'admin' }">
 	                <button class="insertNotice" onclick="javascript: location.href='/notice/insert.do'">공지사항 등록</button>
+	                </c:if>
                 </div>
                 <table>
                     <thead>

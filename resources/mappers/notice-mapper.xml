@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="NoticeMapper">
 
-	<resultMap type="com.cosmarket.member.common.notice.model.vo.Notice" id="noticeResultMap">
+	<resultMap type="com.cosmarket.notice.model.vo.Notice" id="noticeResultMap">
 		<id property="noticeNo" column="NOTICE_NO" />
 		<result property="noticeSubject" column="NOTICE_SUBJECT" />	
 		<result property="noticeContent" column="NOTICE_CONTENT" />	

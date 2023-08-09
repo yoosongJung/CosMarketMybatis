@@ -6,8 +6,6 @@
             </div>
             <div id="nav" class="container-fluid">
                 <div id="nav2">
-                    로그인role에 따른 navbar구현시
-                    <button onclick="javascript:location.href='./admin/sellerRecognize.html'">관리자전용페이지</button>
                     <input type="text" placeholder="Search">
                     <button id="navSearch" onclick="navSearch();"><i class="fa-solid fa-magnifying-glass" style="color: #f7f7f7;"></i></button>
                 </div>
@@ -33,7 +31,22 @@
                         </li>
                         <li class="nav-item" style="margin-top: 13px;"><a href="/buyer/shoppingBasket.do">장바구니</a></li>
                         </c:if>
-                        <c:if test="${memberType eq 'buyer' }">
+                        <c:if test="${memberType eq 'buyer' and memberId eq 'admin' }">
+                        <li class="nav-item" style="margin-top: 13px;"><a href="#">${memberName }님</a></li>
+                        <li class="nav-item" style="margin-top: 13px;"><a href="/memberInfo/logout.do">로그아웃</a></li>
+                        <li class="nav-item" style="margin-top: 13px;"><a href="/admin/sellerRecognize.do">관리페이지</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                게시판
+                            </a>
+                            <ul class="dropdown-menu" style="background-color: skyblue;">
+                                <li><a class="dropdown-item" href="/notice/list.do?currentPage=1">공지사항</a></li>
+                                <li><a class="dropdown-item" href="./member/common/QndA.html">Q&A</a></li>
+                                <li><a class="dropdown-item" href="./member/common/freeBoard.html">자유게시판</a></li>
+                            </ul>
+                        </li>
+                        </c:if>
+                        <c:if test="${memberType eq 'buyer' and memberId ne 'admin' }">
                         <li class="nav-item" style="margin-top: 13px;"><a href="#">${memberName }님</a></li>
                         <li class="nav-item" style="margin-top: 13px;"><a href="/memberInfo/logout.do">로그아웃</a></li>
                         <li class="nav-item" style="margin-top: 13px;"><a href="/member/myInfo.do?memberId=${memberId}&memberType=${memberType}">마이페이지</a></li>
